@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.yakymovych.simon.everywhere.ui.login.LoginViewModel" />
+            type="com.yakymovych.simon.yogaapp.ui.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
