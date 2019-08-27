@@ -3,7 +3,7 @@ package com.yakymovych.simon.yogaapp.di
 import android.content.Context
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.yakymovych.simon.yogaapp.MVVMApplication
-import com.yakymovych.simon.yogaapp.data.RetroService
+import com.yakymovych.simon.yogaapp.data.api.RetroService
 import com.yakymovych.simon.yogaapp.utils.SchedulerProvider
 import dagger.Module
 import dagger.Provides

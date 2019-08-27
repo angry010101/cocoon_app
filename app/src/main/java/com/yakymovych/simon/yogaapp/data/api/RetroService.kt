@@ -1,8 +1,8 @@
 package com.yakymovych.simon.yogaapp.data
 
-import com.yakymovych.simon.yogaapp.data.requests.LoginOrRegisterRequest
-import com.yakymovych.simon.yogaapp.data.responses.LoginOrRegisterResponse
-import com.yakymovych.simon.yogaapp.data.responses.GetTasksResponse
+import com.yakymovych.simon.yogaapp.data.api.requests.LoginOrRegisterRequest
+import com.yakymovych.simon.yogaapp.data.api.responses.LoginOrRegisterResponse
+import com.yakymovych.simon.yogaapp.data.api.responses.GetTasksResponse
 import io.reactivex.Single
 import retrofit2.http.*
 

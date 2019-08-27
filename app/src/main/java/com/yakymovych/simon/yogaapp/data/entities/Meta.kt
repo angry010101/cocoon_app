@@ -1,4 +1,4 @@
-package com.yakymovych.simon.yogaapp.data.requests
+package com.yakymovych.simon.yogaapp.data.api.requests
 
 data class Meta(
     val count: Int,

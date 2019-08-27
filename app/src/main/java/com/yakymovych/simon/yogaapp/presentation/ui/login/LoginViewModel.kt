@@ -8,15 +8,18 @@ import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.CompoundButton
+import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
+import com.yakymovych.simon.yogaapp.R
 import com.yakymovych.simon.yogaapp.data.SignInError
 import com.yakymovych.simon.yogaapp.data.repository.Repository
 import com.yakymovych.simon.yogaapp.ui.BaseViewModel
 import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
+import javax.inject.Inject
 
-class LoginViewModel(var repository: Repository) : BaseViewModel(){
+class LoginViewModel @Inject constructor(var repository: Repository) : BaseViewModel(){
     var editTextEmailValue = "sample@site.com"
     var editTextPasswordValue = "0123456"
     var doRegister = MutableLiveData<Boolean>(false)
@@ -57,6 +60,7 @@ class LoginViewModel(var repository: Repository) : BaseViewModel(){
 
 
     private fun signIn(view: View){
+
         repository.login(editTextEmailValue, editTextPasswordValue)
                 .subscribeBy(
                         onSuccess = {
@@ -107,6 +111,9 @@ class LoginViewModel(var repository: Repository) : BaseViewModel(){
                         })
     }
     fun onLogInClick(view: View) {
+        toastMessage.value = "click"
+        view.findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+
         (view as Button).isEnabled = false
         if ((validateEmail() && validatePass())) {
             Timber.d("LOGINING: " + editTextEmailValue + " " + editTextPasswordValue)

@@ -5,4 +5,6 @@ import androidx.lifecycle.ViewModel
 
 abstract class BaseViewModel() : ViewModel(){
     var toastMessage = MutableLiveData<String>()
+
+
 }
