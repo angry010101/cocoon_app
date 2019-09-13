@@ -1,4 +1,4 @@
-package com.yakymovych.simon.yogaapp.data
+package com.yakymovych.simon.yogaapp.data.api
 
 import com.yakymovych.simon.yogaapp.data.api.requests.LoginOrRegisterRequest
 import com.yakymovych.simon.yogaapp.data.api.responses.LoginOrRegisterResponse

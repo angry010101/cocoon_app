@@ -1,4 +1,4 @@
-package com.yakymovych.simon.yogaapp.ui.login
+package com.yakymovych.simon.yogaapp.presentation.ui.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.yakymovych.simon.yogaapp.R
-import com.yakymovych.simon.yogaapp.ui.BaseFragment
-import com.yakymovych.simon.yogaapp.ui.BaseViewModel
-import com.yakymovych.simon.yogaapp.di.DaggerViewModelFactory
+import com.yakymovych.simon.yogaapp.presentation.ui.BaseFragment
+import com.yakymovych.simon.yogaapp.presentation.ui.BaseViewModel
+import com.yakymovych.simon.yogaapp.presentation.di.DaggerViewModelFactory
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {

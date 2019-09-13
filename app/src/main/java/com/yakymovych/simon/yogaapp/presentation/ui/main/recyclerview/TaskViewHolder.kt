@@ -1,10 +1,10 @@
-package com.yakymovych.simon.yogaapp.ui.main.recyclerview
+package com.yakymovych.simon.yogaapp.presentation.ui.main.recyclerview
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yakymovych.simon.yogaapp.data.Task
-import com.yakymovych.simon.yogaapp.utils.TextUtils
+import com.yakymovych.simon.yogaapp.presentation.utils.TextUtils
 import kotlinx.android.synthetic.main.view_holder_task.view.*
 
 

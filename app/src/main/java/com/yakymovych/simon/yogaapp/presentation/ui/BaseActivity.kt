@@ -1,4 +1,4 @@
-package com.yakymovych.simon.yogaapp.ui
+package com.yakymovych.simon.yogaapp.presentation.ui
 
 import android.os.Bundle
 import android.widget.Toast

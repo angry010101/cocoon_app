@@ -1,10 +1,10 @@
 package com.yakymovych.simon.yogaapp.data.repository
 
-import com.yakymovych.simon.yogaapp.data.RetroService
-import com.yakymovych.simon.yogaapp.data.requests.LoginOrRegisterRequest
-import com.yakymovych.simon.yogaapp.data.responses.LoginOrRegisterResponse
-import com.yakymovych.simon.yogaapp.di.AuthInterceptor
-import com.yakymovych.simon.yogaapp.utils.SchedulerProvider
+import com.yakymovych.simon.yogaapp.data.api.RetroService
+import com.yakymovych.simon.yogaapp.data.api.requests.LoginOrRegisterRequest
+import com.yakymovych.simon.yogaapp.data.api.responses.LoginOrRegisterResponse
+import com.yakymovych.simon.yogaapp.presentation.di.AuthInterceptor
+import com.yakymovych.simon.yogaapp.presentation.utils.SchedulerProvider
 import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton

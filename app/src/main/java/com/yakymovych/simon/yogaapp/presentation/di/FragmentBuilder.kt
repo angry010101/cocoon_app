@@ -1,9 +1,9 @@
-package com.yakymovych.simon.yogaapp.di
+package com.yakymovych.simon.yogaapp.presentation.di
 
-import com.yakymovych.simon.yogaapp.ui.main.MainFragment
-import com.yakymovych.simon.yogaapp.ui.main.MainViewModelModule
-import com.yakymovych.simon.yogaapp.ui.login.LoginFragment
-import com.yakymovych.simon.yogaapp.ui.login.LoginViewModelModule
+import com.yakymovych.simon.yogaapp.presentation.ui.main.MainFragment
+import com.yakymovych.simon.yogaapp.presentation.ui.main.MainViewModelModule
+import com.yakymovych.simon.yogaapp.presentation.ui.login.LoginFragment
+import com.yakymovych.simon.yogaapp.presentation.ui.login.LoginViewModelModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

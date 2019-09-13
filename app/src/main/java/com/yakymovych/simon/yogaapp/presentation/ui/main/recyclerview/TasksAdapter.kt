@@ -1,4 +1,4 @@
-package com.yakymovych.simon.yogaapp.ui.main.recyclerview
+package com.yakymovych.simon.yogaapp.presentation.ui.main.recyclerview
 //
 //import android.view.LayoutInflater
 //import android.view.ViewGroup

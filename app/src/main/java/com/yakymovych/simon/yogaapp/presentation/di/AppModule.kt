@@ -1,10 +1,10 @@
-package com.yakymovych.simon.yogaapp.di
+package com.yakymovych.simon.yogaapp.presentation.di
 
 import android.content.Context
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import com.yakymovych.simon.yogaapp.MVVMApplication
+import com.yakymovych.simon.yogaapp.presentation.MVVMApplication
 import com.yakymovych.simon.yogaapp.data.api.RetroService
-import com.yakymovych.simon.yogaapp.utils.SchedulerProvider
+import com.yakymovych.simon.yogaapp.presentation.utils.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers

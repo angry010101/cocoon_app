@@ -1,4 +1,4 @@
-package com.yakymovych.simon.yogaapp.di
+package com.yakymovych.simon.yogaapp.presentation.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

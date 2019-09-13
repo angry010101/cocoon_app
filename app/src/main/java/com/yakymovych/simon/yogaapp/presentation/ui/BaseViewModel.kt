@@ -1,4 +1,4 @@
-package com.yakymovych.simon.yogaapp.ui
+package com.yakymovych.simon.yogaapp.presentation.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

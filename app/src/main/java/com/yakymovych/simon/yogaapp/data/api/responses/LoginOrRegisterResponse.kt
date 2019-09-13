@@ -1,4 +1,4 @@
-package com.yakymovych.simon.yogaapp.data.responses
+package com.yakymovych.simon.yogaapp.data.api.responses
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

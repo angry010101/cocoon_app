@@ -18,4 +18,6 @@
     <string name="action_sort_dueby">Due by</string>
     <string name="action_sort_title">Title</string>
     <string name="action_sort_priority">Priority</string>
+
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.yakymovych.simon.yogaapp.utils
+package com.yakymovych.simon.yogaapp.presentation.utils
 
 import java.text.SimpleDateFormat
 import java.util.*

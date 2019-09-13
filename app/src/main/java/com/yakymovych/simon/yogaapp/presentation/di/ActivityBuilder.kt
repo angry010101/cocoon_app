@@ -1,7 +1,7 @@
-package com.yakymovych.simon.yogaapp.di
+package com.yakymovych.simon.yogaapp.presentation.di
 
 
-import com.yakymovych.simon.yogaapp.ui.MainActivity
+import com.yakymovych.simon.yogaapp.presentation.ui.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import javax.inject.Scope

@@ -1,4 +1,4 @@
-package com.yakymovych.simon.yogaapp.ui.login
+package com.yakymovych.simon.yogaapp.presentation.ui.login
 
 import androidx.lifecycle.MutableLiveData
 import android.text.Editable
@@ -14,7 +14,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import com.yakymovych.simon.yogaapp.R
 import com.yakymovych.simon.yogaapp.data.SignInError
 import com.yakymovych.simon.yogaapp.data.repository.Repository
-import com.yakymovych.simon.yogaapp.ui.BaseViewModel
+import com.yakymovych.simon.yogaapp.presentation.ui.BaseViewModel
 import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
 import javax.inject.Inject

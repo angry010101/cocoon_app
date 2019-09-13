@@ -1,19 +1,12 @@
-package com.yakymovych.simon.yogaapp.ui.main
+package com.yakymovych.simon.yogaapp.presentation.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.yakymovych.simon.yogaapp.data.Task
-import com.yakymovych.simon.yogaapp.ui.BaseViewModel
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
-import com.github.ajalt.timberkt.Timber
-import com.yakymovych.simon.yogaapp.data.Sort
+import com.yakymovych.simon.yogaapp.presentation.ui.BaseViewModel
 
-import com.yakymovych.simon.yogaapp.R
 import com.yakymovych.simon.yogaapp.data.repository.Repository
 import javax.inject.Inject
 
 
-class MainViewModel @Inject constructor(private val repository: Repository):BaseViewModel() {
+class MainViewModel @Inject constructor(private val repository: Repository): BaseViewModel() {
 
 //    var tasks: LiveData<PagedList<Task>>
 //    var sort: Int  = R.id.action_sort_id

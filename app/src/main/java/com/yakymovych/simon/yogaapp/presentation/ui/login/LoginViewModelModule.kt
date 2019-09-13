@@ -1,7 +1,7 @@
-package com.yakymovych.simon.yogaapp.ui.login
+package com.yakymovych.simon.yogaapp.presentation.ui.login
 
 import androidx.lifecycle.ViewModel
-import com.yakymovych.simon.yogaapp.di.ViewModelKey
+import com.yakymovych.simon.yogaapp.presentation.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
