@@ -3,20 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.yakymovych.simon.yogaapp.presentation.ui.login.LoginFragment"
-        tools:layout="@layout/login_fragment"
-        android:label="LoginFragment" >
-        <action
-            android:id="@+id/action_loginFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+        android:id="@+id/detailsFragment"
+        android:name="com.yakymovych.simon.yogaapp.presentation.ui.main.DetailsFragment"
+        tools:layout="@layout/content_main"
+        android:label="DetailsFragment">
+        <argument
+            android:name="transaction"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.yakymovych.simon.yogaapp.presentation.ui.main.MainFragment"
         tools:layout="@layout/content_main"
-        android:label="MainFragment" />
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_DetailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 </navigation>

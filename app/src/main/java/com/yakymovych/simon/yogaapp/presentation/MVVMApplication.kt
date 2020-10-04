@@ -2,11 +2,11 @@ package com.yakymovych.simon.yogaapp.presentation
 
 import android.content.Context
 import com.github.ajalt.timberkt.Timber
-import com.yakymovych.simon.yogaapp.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import androidx.multidex.MultiDex
 import com.yakymovych.simon.yogaapp.BuildConfig
+import com.yakymovych.simon.yogaapp.presentation.di.DaggerAppComponent
 
 
 class MVVMApplication : DaggerApplication(){

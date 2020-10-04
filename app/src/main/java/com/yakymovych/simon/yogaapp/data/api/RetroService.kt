@@ -1,28 +1,19 @@
 package com.yakymovych.simon.yogaapp.data.api
 
-import com.yakymovych.simon.yogaapp.data.api.requests.LoginOrRegisterRequest
-import com.yakymovych.simon.yogaapp.data.api.responses.LoginOrRegisterResponse
-import com.yakymovych.simon.yogaapp.data.api.responses.GetTasksResponse
+import com.yakymovych.simon.yogaapp.data.api.responses.GithubUser
+import com.yakymovych.simon.yogaapp.data.api.responses.GithubUserInfo
 import io.reactivex.Single
 import retrofit2.http.*
 
 interface RetroService {
     companion object {
-        const val LOGIN_URL = "auth"
-        const val GET_TASKS_URL = "tasks"
-        const val USERS_URL = "users"
+        const val GET_USERS = "/users"
+        const val GET_USER = "/users/{username}"
     }
 
-    @Headers("Content-Type: application/json")
-    @POST(LOGIN_URL)
-    fun login(@Body loginRequest: LoginOrRegisterRequest): Single<LoginOrRegisterResponse>
+    @GET(GET_USERS)
+    fun getUsers(@Query("since") id: Int): Single<List<GithubUser>>
 
-    @GET(GET_TASKS_URL)
-//    Call<List<Repo>> listRepos(@Path("user") String user);
-    fun getTasks(@Query("page") page: Int, @Query("sort") sort: String): Single<GetTasksResponse>
-
-    @Headers("Content-Type: application/json")
-    @POST(USERS_URL)
-    fun register(@Body loginOrRegisterRequest: LoginOrRegisterRequest): Single<LoginOrRegisterResponse>
-
+    @GET(GET_USER)
+    fun getUserInfo(@Path("username") username: String): Single<GithubUserInfo>
 }
