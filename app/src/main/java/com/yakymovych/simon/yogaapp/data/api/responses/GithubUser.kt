@@ -56,3 +56,7 @@ data class GithubUser(
 
         }
 }
+
+@Entity(tableName = "notes",
+        indices = [Index(value = ["id"], unique = true)])
+data class UserNote(@PrimaryKey var id: Int,var username: String, var note: String)

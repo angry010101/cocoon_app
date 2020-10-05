@@ -37,8 +37,18 @@ class DetailsFragment : BaseFragment() {
                 setUser(it)
             }
         })
-        val user = arguments?.getString("userLogin","") ?: ""
-        if (user.isNotEmpty()){
+        mainViewModel.userNote.observe(this, Observer {
+            it?.let {
+                rootView.save.setText(it)
+            }
+        })
+        val user = arguments?.getString("userLogin", "") ?: ""
+        if (user.isNotEmpty()) {
+            mainViewModel.dao.getNote(user).observe(this, Observer {
+                it?.let{
+                    rootView.save.setText(it.note)
+                }
+            })
             mainViewModel.requestUser(user)
         }
         return rootView
@@ -50,9 +60,11 @@ class DetailsFragment : BaseFragment() {
                 .into(rootView.imageView)
         rootView.followers.text = user.followers.toString()
         rootView.following.text = user.following.toString()
-
         rootView.name.text = user.login
         rootView.company.text = user.company
         rootView.blog.text = user.blog
+        rootView.save_btn.setOnClickListener {
+            mainViewModel.saveNote(user.id, user.login, rootView.save.text.toString())
+        }
     }
 }

@@ -23,6 +23,7 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val dueBy: TextView
     val avatar: CircleImageView
     val wrapper: ViewGroup
+    val taskPriority: View
     var negative: Boolean = false
 
     companion object {
@@ -47,6 +48,7 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         dueBy = view.task_dueby
         avatar = view.imageView
         wrapper = view.wrapper
+        taskPriority = view.task_priority
     }
 }
 

@@ -1,26 +1,32 @@
 package com.yakymovych.simon.yogaapp.presentation.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.os.Build
+import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.yakymovych.simon.yogaapp.data.api.responses.GithubUser
 import com.yakymovych.simon.yogaapp.data.api.responses.GithubUserInfo
-import com.yakymovych.simon.yogaapp.presentation.ui.BaseViewModel
+import com.yakymovych.simon.yogaapp.data.api.responses.UserNote
+import com.yakymovych.simon.yogaapp.data.repository.GithubDb
 
 import com.yakymovych.simon.yogaapp.data.repository.Repository
+import com.yakymovych.simon.yogaapp.presentation.MVVMApplication
+import com.yakymovych.simon.yogaapp.presentation.ui.BaseViewModel
 import com.yakymovych.simon.yogaapp.presentation.ui.main.recyclerview.TasksDataSourceFactory
 import com.yakymovych.simon.yogaapp.ui.main.recyclerview.TasksDataSource
 import io.reactivex.rxkotlin.subscribeBy
-import timber.log.Timber
 import javax.inject.Inject
 
 
-class MainViewModel @Inject constructor(var tasksFactory: TasksDataSourceFactory,
-                                        private val repository: Repository): BaseViewModel() {
+class MainViewModel @Inject constructor(application: MVVMApplication,
+                                        var db: GithubDb,
+                                        var tasksFactory: TasksDataSourceFactory,
+                                        private val repository: Repository): BaseViewModel(application) {
     var tasks: LiveData<PagedList<GithubUser>>
 
     var isResfreshing = MutableLiveData<Boolean>()
@@ -29,11 +35,12 @@ class MainViewModel @Inject constructor(var tasksFactory: TasksDataSourceFactory
             .setInitialLoadSizeHint(10)
             .setPageSize(LIMIT).build()
 
-    var userData = MutableLiveData<GithubUserInfo>()
+    var dao = db.users()
 
-    var isLoadingData = MediatorLiveData<Boolean>().apply {
-        value = false
-    }
+    var userData = MutableLiveData<GithubUserInfo>()
+    var userNote = MutableLiveData<String>()
+
+    var isLoadingData = MediatorLiveData<Boolean>().apply { value = false }
 
     companion object {
         var LIMIT = 15
@@ -55,10 +62,10 @@ class MainViewModel @Inject constructor(var tasksFactory: TasksDataSourceFactory
 
     var refreshListener = SwipeRefreshLayout.OnRefreshListener {
           this.isResfreshing.value = true
-          refreshTasks()
+          refresh()
     }
 
-    fun refreshTasks(){
+    fun refresh(){
         tasksFactory.dataSource.value?.invalidate()
     }
 
@@ -68,5 +75,11 @@ class MainViewModel @Inject constructor(var tasksFactory: TasksDataSourceFactory
         }, {
             userData.value = it
         })
+    }
+
+    fun saveNote(id: Int, name: String, text: String) {
+        Thread {
+            dao.insertNote(UserNote(id,name,text))
+        }.start()
     }
 }
