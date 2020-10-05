@@ -42,6 +42,9 @@ class MainFragment : BaseFragment() {
         mainViewModel.tasks.observe(this, Observer {
             adapter.submitList(it)
         })
+        mainViewModel.isLoadingData.observe(this, Observer {
+
+        })
         rootView.tasks_recycler_view.adapter = adapter
         (rootView.tasks_recycler_view.adapter as TasksAdapter).notifyDataSetChanged()
         rootView.swipeContainer.setOnRefreshListener {

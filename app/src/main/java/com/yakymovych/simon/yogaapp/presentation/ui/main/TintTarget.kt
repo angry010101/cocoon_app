@@ -1,8 +1,6 @@
 package com.yakymovych.simon.yogaapp.presentation.ui.main
 
-import android.content.res.ColorStateList
 import android.graphics.ColorMatrixColorFilter
-import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.core.graphics.drawable.DrawableCompat

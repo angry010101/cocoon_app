@@ -49,3 +49,8 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         wrapper = view.wrapper
     }
 }
+
+
+class FooterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+}

@@ -1,9 +1,17 @@
 package com.yakymovych.simon.yogaapp.data.api.responses
 
 import androidx.recyclerview.widget.DiffUtil
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "users",
+        indices = [Index(value = ["id"], unique = true)])
 data class GithubUser(
+        @PrimaryKey
+        @SerializedName("id")
+        var id: Int,
         @SerializedName("avatar_url")
         var avatarUrl: String,
         @SerializedName("events_url")
@@ -18,8 +26,6 @@ data class GithubUser(
         var gravatarId: String,
         @SerializedName("html_url")
         var htmlUrl: String,
-        @SerializedName("id")
-        var id: Int,
         @SerializedName("login")
         var login: String,
         @SerializedName("node_id")
