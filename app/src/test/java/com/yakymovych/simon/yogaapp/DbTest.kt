@@ -12,7 +12,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
+//6. Write Unit tests for data processing logic & models,
 @RunWith(AndroidJUnit4::class)
 class DbTest {
     private var db: GithubDb? = null
@@ -28,6 +28,7 @@ class DbTest {
         usersDao = db?.users()
     }
 
+    //6. Room models (validate creation)
     @Test
     @Throws(java.lang.Exception::class)
     fun addRecord() {
@@ -39,6 +40,35 @@ class DbTest {
             usersDao!!.insert(employees)
             val dbEmployees: List<GithubUser> = usersDao?.getAllUsers(0) ?: emptyList()
             assertEquals(1, dbEmployees.size)
+        }
+        t.start()
+        t.join()
+    }
+
+    //6. Room models (validate update)
+    @Test
+    @Throws(java.lang.Exception::class)
+    fun updateRecord() {
+        val tValidateCreate = Thread {
+            assertEquals(0, usersDao?.getAllUsers(0)!!.size)
+            addRecord()
+            val dbEmployees: List<GithubUser> = usersDao?.getAllUsers(0) ?: emptyList()
+            assertEquals(1, dbEmployees.size)
+            assertEquals(dbEmployees.get(0).followersUrl, "")
+        }
+        tValidateCreate.start()
+        tValidateCreate.join()
+        val user = GithubUser(0,"","","myfollowers",
+                "","",
+                "","","","user1","","",
+                "",false,"","","","")
+        val employees: List<GithubUser> = listOf(user)
+        val t = Thread {
+            assertEquals(1, usersDao?.getAllUsers(0)!!.size)
+            usersDao!!.insert(employees)
+            val dbEmployees: List<GithubUser> = usersDao?.getAllUsers(0) ?: emptyList()
+            assertEquals(1, dbEmployees.size)
+            assertEquals(dbEmployees.get(0).followersUrl, "myfollowers")
         }
         t.start()
         t.join()
