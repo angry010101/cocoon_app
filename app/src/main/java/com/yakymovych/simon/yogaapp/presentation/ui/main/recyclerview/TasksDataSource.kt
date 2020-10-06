@@ -13,9 +13,9 @@ import io.reactivex.rxkotlin.subscribeBy
 
 
 class TasksDataSource(
-    private val db: GithubDb,
-    private val retroService: RetroService)
-        : PageKeyedDataSource<Int, GithubUser>() {
+        private val db: GithubDb,
+        private val retroService: RetroService)
+    : PageKeyedDataSource<Int, GithubUser>() {
 
     private var items: MutableList<GithubUser> = ArrayList()
     private var dao: GithubUserDao = db.users()
@@ -29,7 +29,7 @@ class TasksDataSource(
                 onSuccess = {
                     Timber.d { "SUCCESS NETWORK INIT" }
                     this@TasksDataSource.items.addAll(it)
-                    callback.onResult(it,0 ,it[it.size-1].id)
+                    callback.onResult(it, 0, it[it.size - 1].id)
                     dao.insert(it)
                     isLoading.postValue(false)
                 },
@@ -37,7 +37,8 @@ class TasksDataSource(
                     throwable.printStackTrace()
                     Timber.d { "ERROR NETWORK INIT" }
                     isLoading.postValue(false)
-                    callback.onResult(dao.getAllUsers(0),0,0)
+                    val data = dao.getAllUsers(0)
+                    callback.onResult(data, 0, data.get(data.size - 1).id)
                 })
     }
 
@@ -47,17 +48,19 @@ class TasksDataSource(
                 onSuccess = {
                     Timber.d { "SUCCESS NETWORK AFTER" }
                     this@TasksDataSource.items.addAll(it)
-                    callback.onResult(it,it[it.size-1].id)
+                    callback.onResult(it, it[it.size - 1].id)
                     dao.insert(it)
                     isLoading.postValue(false)
-                    if (it.size == 0){
+                    if (it.size == 0) {
                         notifyEnd.postValue(true)
                     }
                 },
                 onError = { throwable ->
                     Timber.d { "ERROR NETWORK AFTER" }
                     isLoading.postValue(false)
-                    callback.onResult(dao.getAllUsers(params.key),params.key)
+                    val data = dao.getAllUsers(params.key + 1)
+                    val next = if (data.isEmpty()) params.key + 1 else data.get(data.size - 1).id
+                    callback.onResult(data, next)
                 })
     }
 

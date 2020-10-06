@@ -32,9 +32,9 @@ class DbTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun addRecord() {
-        val user = GithubUser(0,"","","","","",
-                        "","","","user1","","",
-                        "",false,"","","","")
+        val user = GithubUser(0, "", "", "", "", "",
+                "", "", "", "user1", "", "",
+                "", false, "", "", "", "")
         val employees: List<GithubUser> = listOf(user)
         val t = Thread {
             usersDao!!.insert(employees)
@@ -58,10 +58,10 @@ class DbTest {
         }
         tValidateCreate.start()
         tValidateCreate.join()
-        val user = GithubUser(0,"","","myfollowers",
-                "","",
-                "","","","user1","","",
-                "",false,"","","","")
+        val user = GithubUser(0, "", "", "myfollowers",
+                "", "",
+                "", "", "", "user1", "", "",
+                "", false, "", "", "", "")
         val employees: List<GithubUser> = listOf(user)
         val t = Thread {
             assertEquals(1, usersDao?.getAllUsers(0)!!.size)

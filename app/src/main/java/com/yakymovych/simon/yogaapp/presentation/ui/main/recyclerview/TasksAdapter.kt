@@ -52,8 +52,9 @@ class TasksAdapter(var dao:GithubUserDao, val onClick: (GithubUser) -> Unit) :
             item?.login?.let {
                 Thread {
                     val note = dao.getNoteSync(it)
-                    holder.taskPriority.post {
-                        holder.taskPriority.visibility = if (note != null) View.VISIBLE else View.GONE
+                    //may throw NullPointerException
+                    holder?.taskPriority?.post {
+                        holder?.taskPriority?.visibility = if (note != null) View.VISIBLE else View.GONE
                     }
                 }.start()
             }
