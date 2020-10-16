@@ -1,7 +1,6 @@
 package com.yakymovych.simon.yogaapp.ui.main.recyclerview
 
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.github.ajalt.timberkt.Timber
@@ -23,12 +22,17 @@ class TasksDataSource(
     var isLoading = MutableLiveData<Boolean>()
     var notifyEnd = MutableLiveData<Boolean>()
 
+    // #2 Page size. Determine the page size based on the first batch loaded. Default 30
+    var pageSize = 30
+
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, GithubUser>) {
         isLoading.postValue(true)
         retroService.getUsers(0).subscribeBy(
                 onSuccess = {
                     Timber.d { "SUCCESS NETWORK INIT" }
                     this@TasksDataSource.items.addAll(it)
+                    //set the new page size
+                    pageSize = it.size
                     callback.onResult(it, 0, it[it.size - 1].id)
                     dao.insert(it)
                     isLoading.postValue(false)
