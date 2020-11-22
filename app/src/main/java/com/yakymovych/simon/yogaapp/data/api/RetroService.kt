@@ -1,19 +1,15 @@
 package com.yakymovych.simon.yogaapp.data.api
 
-import com.yakymovych.simon.yogaapp.data.api.responses.GithubUser
-import com.yakymovych.simon.yogaapp.data.api.responses.GithubUserInfo
+import com.yakymovych.simon.yogaapp.data.api.responses.TopNewsResponse
 import io.reactivex.Single
 import retrofit2.http.*
 
 interface RetroService {
     companion object {
-        const val GET_USERS = "/users"
-        const val GET_USER = "/users/{username}"
+        const val GET_USERS = "svc/topstories/v2/arts.json?api-key=cdR5nUMbAM2vC4893e8P3MGRhaAarvHq"
     }
 
     @GET(GET_USERS)
-    fun getUsers(@Query("since") id: Int): Single<List<GithubUser>>
+    fun getData(): Single<TopNewsResponse>
 
-    @GET(GET_USER)
-    fun getUserInfo(@Path("username") username: String): Single<GithubUserInfo>
 }

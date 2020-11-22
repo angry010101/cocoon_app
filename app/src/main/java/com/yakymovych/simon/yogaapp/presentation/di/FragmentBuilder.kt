@@ -1,8 +1,6 @@
 package com.yakymovych.simon.yogaapp.presentation.di
 
-import com.yakymovych.simon.yogaapp.presentation.ui.main.DetailsFragment
-import com.yakymovych.simon.yogaapp.presentation.ui.main.MainFragment
-import com.yakymovych.simon.yogaapp.presentation.ui.main.MainViewModelModule
+import com.yakymovych.simon.yogaapp.presentation.ui.main.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -13,4 +11,10 @@ abstract class FragmentBuilder {
 
     @ContributesAndroidInjector(modules = arrayOf(MainViewModelModule::class))
     abstract fun bindDetailsViewModel(): DetailsFragment
+
+    @ContributesAndroidInjector(modules = arrayOf(MainViewModelModule::class))
+    abstract fun bindFavoritesViewModel(): FavoritesFragment
+
+    @ContributesAndroidInjector(modules = arrayOf(MainViewModelModule::class))
+    abstract fun bindCollectionViewModel(): CollectionFragment
 }

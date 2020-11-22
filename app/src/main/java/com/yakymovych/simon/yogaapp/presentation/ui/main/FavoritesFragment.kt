@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yakymovych.simon.yogaapp.R
 import com.yakymovych.simon.yogaapp.presentation.di.DaggerViewModelFactory
-import com.yakymovych.simon.yogaapp.presentation.ui.BaseActivity
 import com.yakymovych.simon.yogaapp.presentation.ui.BaseFragment
 import com.yakymovych.simon.yogaapp.presentation.ui.BaseViewModel
 import com.yakymovych.simon.yogaapp.presentation.ui.main.recyclerview.TasksAdapter
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main2.view.*
 import javax.inject.Inject
 
 
-class MainFragment : BaseFragment() {
+class FavoritesFragment : BaseFragment() {
     @Inject
     lateinit var viewModeFactory: DaggerViewModelFactory
 
@@ -34,18 +34,19 @@ class MainFragment : BaseFragment() {
         val llm = LinearLayoutManager(requireContext())
         llm.orientation = LinearLayoutManager.VERTICAL
         rootView.tasks_recycler_view.layoutManager = llm;
-
-        mainViewModel.data.observe(this, Observer {
+        rootView.tasks_recycler_view.layoutManager = GridLayoutManager(requireContext(), 3)
+        mainViewModel.dataSaved.observe(this, Observer {
             if (it == null) return@Observer
-            val adapter = TasksAdapter(true, mainViewModel.dao, it) { _, pos ->
+            val adapter = TasksAdapter(false, mainViewModel.dao, it) { _, pos ->
                 val bundle = Bundle()
                 bundle.putInt("newsPosition", pos)
+                bundle.putBoolean("isSaved",true)
                 findNavController().navigate(R.id.action_mainFragment_to_DetailsFragment, bundle)
             }
             rootView.tasks_recycler_view.adapter = adapter
             (rootView.tasks_recycler_view.adapter as TasksAdapter).notifyDataSetChanged()
         })
-        mainViewModel.requestData()
+        mainViewModel.requestCached()
         return rootView
     }
 }

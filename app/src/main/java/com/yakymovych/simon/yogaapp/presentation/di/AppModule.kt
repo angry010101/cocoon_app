@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.yakymovych.simon.yogaapp.presentation.MVVMApplication
 import com.yakymovych.simon.yogaapp.data.api.RetroService
-import com.yakymovych.simon.yogaapp.data.repository.GithubDb
+import com.yakymovych.simon.yogaapp.data.repository.FavoritesDb
 import com.yakymovych.simon.yogaapp.presentation.utils.SchedulerProvider
 import dagger.Module
 import dagger.Provides
@@ -31,8 +31,9 @@ open class AppModule {
 
 	@Provides
 	@Singleton
-	open fun provideDatabase(context: Context): GithubDb =
-		Room.databaseBuilder(context, GithubDb::class.java, "database").build()
+	open fun provideDatabase(context: Context): FavoritesDb =
+		Room.databaseBuilder(context, FavoritesDb::class.java, "database")
+				.allowMainThreadQueries().build()
 
 	@Provides
 	@Singleton
@@ -45,7 +46,7 @@ open class AppModule {
 			}
 			val client = OkHttpClient.Builder().dispatcher(dispatcher).build()
 			Retrofit.Builder()
-				.baseUrl("https://api.github.com/")
+				.baseUrl("https://api.nytimes.com/")
 				.client(client)
 				.addConverterFactory(GsonConverterFactory.create())
 				.addCallAdapterFactory(RxJava2CallAdapterFactory.create())

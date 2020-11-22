@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.yakymovych.simon.yogaapp.R
-import com.yakymovych.simon.yogaapp.data.api.responses.GithubUserInfo
+import com.yakymovych.simon.yogaapp.data.api.responses.Result
 import com.yakymovych.simon.yogaapp.presentation.di.DaggerViewModelFactory
 import com.yakymovych.simon.yogaapp.presentation.ui.BaseFragment
 import com.yakymovych.simon.yogaapp.presentation.ui.BaseViewModel
@@ -30,41 +30,39 @@ class DetailsFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        mainViewModel = ViewModelProvider(this, viewModeFactory).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(activity!!, viewModeFactory).get(MainViewModel::class.java)
         rootView = inflater.inflate(R.layout.content_main, container, false)
-        mainViewModel.userData.observe(this, Observer {
-            it?.let {
+        val item = arguments?.getInt("newsPosition", -1) ?: -1
+        val isSaved = arguments?.getBoolean("isSaved", false) ?: false
+        if (item >= 0) {
+            val data = if (isSaved){
+                mainViewModel.dao.favorites().get(item)
+            }
+            else {
+                mainViewModel.data.value?.get(item)
+            }
+            data?.let {
                 setUser(it)
             }
-        })
-        mainViewModel.userNote.observe(this, Observer {
-            it?.let {
-                rootView.save.setText(it)
-            }
-        })
-        val user = arguments?.getString("userLogin", "") ?: ""
-        if (user.isNotEmpty()) {
-            mainViewModel.dao.getNote(user).observe(this, Observer {
-                it?.let{
-                    rootView.save.setText(it.note)
-                }
-            })
-            mainViewModel.requestUser(user)
         }
         return rootView
     }
 
-    fun setUser(user: GithubUserInfo) {
-        Glide.with(this).load(user.avatarUrl)
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .into(rootView.imageView)
-        rootView.followers.text = user.followers.toString()
-        rootView.following.text = user.following.toString()
-        rootView.name.text = user.login
-        rootView.company.text = user.company
-        rootView.blog.text = user.blog
-        rootView.save_btn.setOnClickListener {
-            mainViewModel.saveNote(user.id, user.login, rootView.save.text.toString())
+    fun setUser(item: Result) {
+        if (item.multimedia.isNotEmpty()){
+            Glide.with(this).load(item.multimedia.get(0).url)
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .into(rootView.imageView)
         }
+        if (!item.image.isNullOrEmpty()){
+            Glide.with(this).load(item.image)
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .into(rootView.imageView)
+        }
+        rootView.followers.text = item.created_date.toString()
+        rootView.following.text = item.updated_date.toString()
+        rootView.name.text = item.title
+        rootView.company.text = item.abstractText
+        rootView.blog.text = item.short_url
     }
 }
